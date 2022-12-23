@@ -4,4 +4,4 @@ We created a [wiki](https://github.com/Camzcamz/EXTminus23andMe/wiki) to help yo
 
 In the wiki, you'll find the steps, data, and code. 
 
-As a use case, we evaluate the quality and suitability of the externalizing summary statsitics ([`Linnér et al., 2021`](https://www.nature.com/articles/s41593-021-00908-3)) without 23andMe data. 
+As a use case, we evaluate the quality and suitability of the externalizing summary statsitics ([`Karlsson Linnér et al., 2021`](https://www.nature.com/articles/s41593-021-00908-3)) without 23andMe data. 
