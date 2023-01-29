@@ -1,0 +1,3 @@
+./example_data/age_start_smoke.sumstats.gz  age_started_smoking
+./example_data/cig_per_day.sumstats.gz  cigarettes_per_day
+./example_data/family_relationship_satisfaction.sumstats.gz family_relationship_satisfaction

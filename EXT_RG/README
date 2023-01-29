@@ -1,0 +1,55 @@
+# Genomic SEM Wrapper for estimating the genetic correlation between EXT-23andme and traits of your interest
+This wrapper runs the Genomic SEM to estimate the genetic correlation between EXT-23andme and traits of your interest. 
+
+The zip file contains some of the Genomic SEM source codes (version as of 24.03.2022) downloaded from https://github.com/GenomicSEM/GenomicSEM. Please make sure you cite the original Genomic SEM paper: https://www.nature.com/articles/s41467-019-09718-5
+
+The Genomic SEM codes in this wrapper were slightly modified to skip redundant and repeated computations.
+
+
+
+# Dependencies (R packages): GenomicSEM, pbmcapply 
+
+
+
+# Required inputs
+1. munged summary statistics files of traits of your interest
+   - Please read https://github.com/GenomicSEM/GenomicSEM/wiki/3.-Models-without-Individual-SNP-effects#step-1-munge-the-summary-statistics)
+
+Note that, for binary traits, Genomic SEM uses genetic covariance and heritability estimates on liability scale. You need to provide population and sample prevalence estimates for this. 
+
+
+
+
+# Using the wrapper:
+Two ways: 1. use EXT_RG_MAIN() function within an R session 2. Run "Rscript EXT_RG.R INPUT_FILE" with an INPUT_FILE prepared in advance.  
+
+1. Use EXT_RG_MAIN() function (example in EXAMPLE1.R)
+   - The function takes 4 inputs:
+       1) file_vec: a vector containing the full path to the munged summary statistics files
+       2) trait.name_vec: a vector containing the trait names (of your choice)
+       3) sample.prev_vec: a vector containing the sample prevalence estimates of each trait. Set NA for continuous traits. If all traits are continuous, you do not need to specify this argument.
+       4) population.prev_vec: a vector containing the population prevalence estimates of each trait. Set NA for continuous traits. If all traits are continuous, you do not need to specify this argument.
+    ## NOTE: Each vector here should have the same order of your traits
+       5) cores: number of threads to run the function with multiple traits in parallel. 
+
+
+2. Use EXT_RG.R script with Rscript command (example in EXAMPLE2.sh)
+   - Usage:  Rscript EXT_RG.R 1_INPUT 2_OUTPUT_PREFIX 3_NUMBER_OF_THREADS
+
+      - 1_INPUT: delimited text file with
+                # column 1: path to munged sumstat files
+                # column 2: trait names (white space must not be included, unless you delimit the columns with comma or tab)
+                # column 3: sample prevalence (for binary traits, insert NA for continuous tratis)
+                # column 4: populaton prevalence (for binary traits, insert NA for continuous tratis)
+      - 2_OUTPUT_PREFIX: prefix for the output file
+      - 3_NUMBER_OF_THREADS: number of threads to run the function with multiple traits in parallel.                  
+
+
+
+
+# Output
+Table with 4 columns:
+- TRAIT: trait names as you specified 
+- RG: genetic correlation estimates
+- SE: standard erros
+- P: P-values
