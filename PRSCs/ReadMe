@@ -1,0 +1,45 @@
+# PRS-CS wrapper for EXT-23andme 
+This wrapper runs the PRS-CS procedure and creates polygenic index for EXT-23andme for the prediction sample  
+
+The zip file contains the PRS-CS source codes (version as of Jun 4, 2021) downloaded from https://github.com/getian107/PRScs. Please make sure you cite the original PRS-CS paper: https://www.nature.com/articles/s41467-019-09718-5
+
+
+
+# Dependencies: plink 1.9 and python packages (scipy, h5py)
+    # plink must be in the path: see "UNIX/Linux notes" in https://zzz.bwh.harvard.edu/plink/download.shtml
+    # Or you must set the path to the plink file
+
+
+
+# Required inputs
+1. plink files (.bed, .bim, .fam) of your prediction sample 
+2. EUR LD reference file provided by the PRS-CS authors 
+    # To download EUR LD reference files:
+    wget -O ldblk_1kg_eur.tar.gz https://www.dropbox.com/s/mt6var0z96vb6fv/ldblk_1kg_eur.tar.gz?dl=1 && tar -xzvf ldblk_1kg_eur.tar.gz && rm ldblk_1kg_eur.tar.gz
+
+
+
+# Using the wrapper:
+You need to set 5 parameters:
+
+BFILE: plink file prefix of your prediction sample
+REF: path to EUR LD reference file folder
+OUT: prefix for the output file
+NTHREADS: number of threads (one thread for each chromosome)
+PLINK_PATH: replace this with the path to plink software if plink is not in the path 
+
+   ## Example
+   BFILE=./MY_PLINK_FILE  
+   REF=./ldblk_1kg_eur 
+   OUT=OUTPUT 
+   NTHREADS=22 
+   PLINK_PATH=plink 
+
+   bash PRSCS_WRAPPER.sh ${BFILE} ${REF} ${OUT} ${NTHREADS} ${PLINK_PATH}
+
+
+
+# Output
+OUT.profile
+
+See https://www.cog-genomics.org/plink/1.9/formats#profile for the detail.
